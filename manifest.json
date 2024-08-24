@@ -1,0 +1,10 @@
+{
+    "manifest_version": 3,
+    "name": "Live Video Translator",
+    "description": "Translate texts inside videos while streaming.",
+    "version": "0.1.0",
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": "live-video.png"
+    }
+}
