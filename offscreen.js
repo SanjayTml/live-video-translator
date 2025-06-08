@@ -148,8 +148,8 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
             sendResponse({ success: true, message: "Vosk active." });
         } else {
             // Fallback to old SpeechRecognition if ever used (should be phased out)
-            console.warn("Offscreen: Legacy STT command received while Vosk is intended pipeline.");
-            sendResponse({ success: false, error: "Legacy STT not supported when worklet pipeline is primary." });
+            console.warn("Offscreen: Received legacy STT command (startSTT/stopSTT) but not currently in audio chunk processing mode. This may indicate a setup issue for the Vosk pipeline or a fallback scenario.");
+            sendResponse({ success: false, error: "Legacy STT command received, but offscreen document is not using the audio chunk/Vosk pipeline." });
         }
         return false;
     }

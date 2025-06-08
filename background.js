@@ -60,6 +60,15 @@ async function startTranscription(sendResponseToPopup) {
             isTranscribing = false; sendResponseToPopup({ success: false, error: "No active tab found." }); return;
         }
         currentTabId = tabs[0].id;
+        const currentUrl = tabs[0].url;
+        const restrictedPrefixes = ['chrome://', 'https://chrome.google.com/', 'about:'];
+
+        if (restrictedPrefixes.some(prefix => currentUrl.startsWith(prefix))) {
+            console.error("Cannot capture audio on restricted page:", currentUrl);
+            sendResponseToPopup({ success: false, error: "Cannot capture audio on this page." });
+            isTranscribing = false;
+            return;
+        }
 
         chrome.tabCapture.capture({ audio: true, video: false }, async (stream) => {
             if (chrome.runtime.lastError || !stream) {
@@ -205,7 +214,7 @@ async function initializeAndLoadArgosEnEsModel() {
         try {
             // Dynamically import the Argos Translate script
             // Assumes argos_translate.js defines 'self.argosTranslate' or similar global
-            await import(chrome.runtime.getURL('lib/argos-translate/argos_translate.js'));
+            importScripts(chrome.runtime.getURL('lib/argos-translate/argos_translate.js'));
 
             if (!self.argosTranslate || typeof self.argosTranslate.setLibPath !== 'function') {
                 throw new Error("Argos Translate library not loaded correctly.");
