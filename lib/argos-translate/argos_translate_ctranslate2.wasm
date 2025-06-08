@@ -1,0 +1,3 @@
+// This is a placeholder for the actual argos_translate_ctranslate2.wasm file.
+// It would normally contain the compiled CTranslate2 WebAssembly module.
+// For this simulation, its content is not important, only its presence and path.

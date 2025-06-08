@@ -1,5 +1,93 @@
+<!DOCTYPE html>
 <html>
-    <body>
-        <h1>Live Video Translator</h1>
-    </body>
+<head>
+    <title>Live Audio Translator</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: sans-serif;
+            width: 350px;
+            padding: 10px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        button.recording {
+            background-color: #f44336; /* Red when recording */
+        }
+        button.recording:hover {
+            background-color: #da190b;
+        }
+        select {
+            padding: 8px;
+        }
+        textarea {
+            width: 100%;
+            min-height: 70px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+        .output-area {
+            border: 1px solid #eee;
+            padding: 8px;
+            background-color: #f9f9f9;
+        }
+        h3 {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        #status {
+            font-style: italic;
+            color: #555;
+            font-size: 0.9em;
+            text-align: center;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Live Audio Translator</h2>
+
+        <button id="startStopBtn">Start Transcription</button>
+
+        <div>
+            <label for="translateLang">Translate to:</label>
+            <select id="translateLang">
+                <option value="en">English</option>
+                <option value="de">German</option>
+                <option value="zh">Chinese (Simplified)</option>
+                <option value="ko">Korean</option>
+                <option value="ja">Japanese</option>
+                <option value="es">Spanish</option>
+            </select>
+        </div>
+
+        <div class="output-area">
+            <h3>Original Text (Transcription)</h3>
+            <textarea id="transcribedText" readonly placeholder="Transcription will appear here..."></textarea>
+        </div>
+
+        <div class="output-area">
+            <h3>Translated Text</h3>
+            <textarea id="translatedText" readonly placeholder="Translation will appear here..."></textarea>
+        </div>
+
+        <div id="status">Status: Idle</div>
+    </div>
+    <script src="popup.js"></script>
+</body>
 </html>

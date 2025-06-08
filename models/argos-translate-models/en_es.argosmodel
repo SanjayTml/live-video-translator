@@ -1,0 +1,4 @@
+// This is a placeholder for the en_es.argosmodel file.
+// An actual .argosmodel file is a zip archive containing model data (source.txt, target.txt, model.bin, sentencepiece models etc.)
+// For this simulation, its content is not important, only its presence and path.
+// The Argos Translate JS library would internally handle fetching and unzipping this file.

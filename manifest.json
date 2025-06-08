@@ -1,10 +1,59 @@
 {
     "manifest_version": 3,
-    "name": "Live Video Translator",
-    "description": "Translate texts inside videos while streaming.",
+    "name": "Live Audio Translator",
+    "description": "Transcribes audio from the current tab and translates it.",
     "version": "0.1.0",
     "action": {
         "default_popup": "popup.html",
         "default_icon": "live-video.png"
-    }
+    },
+    "permissions": [
+        "tabCapture",
+        "scripting",
+        "storage",
+        "activeTab",
+        "offscreen"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "icons": {
+        "16": "live-video.png",
+        "48": "live-video.png",
+        "128": "live-video.png"
+    },
+    "offscreen": {
+        "reasons": ["USER_MEDIA", "AUDIO_PLAYBACK"],
+        "justification": "Required for speech-to-text and audio processing.",
+        "path": "offscreen.html"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": ["audio-processor.js"],
+            "matches": ["<all_urls>"]
+        },
+        {
+            "resources": [
+                "lib/vosk-browser/vosk.js",
+                "models/vosk-model-small-en-us/*"
+            ],
+            "matches": ["<all_urls>"]
+        },
+        {
+            "resources": [
+                "lib/argos-translate/argos_translate.js",
+                "lib/argos-translate/argos_translate_ctranslate2.wasm",
+                "models/argos-translate-models/en_es.argosmodel"
+            ],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["content.js"],
+            "css": [],
+            "run_at": "document_idle"
+        }
+    ]
 }

@@ -1,0 +1,4 @@
+This directory would normally contain the Vosk small English model files (e.g., am/, conf/, graph/, ivector/).
+This placeholder file signifies the presence of the model for the extension packaging.
+The actual model files are several MBs and not suitable for direct creation here.
+The Vosk library will try to load files like 'vosk-model-small-en-us.tar.gz.wasm', 'vosk-model-small-en-us.tar.gz' or specific .bin files from this directory.
